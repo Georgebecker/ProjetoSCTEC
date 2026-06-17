@@ -1,0 +1,29 @@
+# Dependências Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Variáveis de ambiente - NUNCA commite arquivos .env
+.env
+.env.local
+.env.development
+.env.production
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build/dist
+dist/
+build/
+
+# Logs
+logs/
+*.log

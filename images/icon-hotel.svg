@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Ícone Hotel para pets">
+  <path d="M18 72 L64 32 L110 72 V110 H18 Z" fill="#ffd54f"/>
+  <rect x="38" y="70" width="52" height="32" fill="#ffa726"/>
+  <rect x="48" y="86" width="14" height="16" fill="#6d4c41"/>
+  <rect x="66" y="86" width="14" height="16" fill="#6d4c41"/>
+  <path d="M18 72 L110 72" stroke="#f57c00" stroke-width="6"/>
+  <path d="M64 32 V12" stroke="#ef6c00" stroke-width="8"/>
+  <path d="M46 20 H82" stroke="#ef6c00" stroke-width="8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Dois cachorrinhos brincando">
+  <rect width="640" height="480" fill="#f9d29d"/>
+  <circle cx="220" cy="280" r="90" fill="#fff2d4"/>
+  <circle cx="420" cy="300" r="90" fill="#fff2d4"/>
+  <ellipse cx="220" cy="310" rx="100" ry="60" fill="#ffd78b"/>
+  <ellipse cx="420" cy="330" rx="100" ry="60" fill="#ffd78b"/>
+  <circle cx="180" cy="245" r="25" fill="#4e342e"/>
+  <circle cx="260" cy="245" r="25" fill="#4e342e"/>
+  <circle cx="380" cy="265" r="25" fill="#4e342e"/>
+  <circle cx="460" cy="265" r="25" fill="#4e342e"/>
+  <path d="M155 320 Q220 360 285 320" fill="#4e342e"/>
+  <path d="M355 350 Q420 390 485 350" fill="#4e342e"/>
+  <path d="M200 220 Q180 180 160 220" fill="#ffd78b"/>
+  <path d="M300 180 Q320 140 340 180" fill="#ffd78b"/>
+  <path d="M380 240 Q360 200 340 240" fill="#ffd78b"/>
+  <path d="M480 210 Q500 170 520 210" fill="#ffd78b"/>
+</svg>

@@ -1,0 +1,93 @@
+Documentação do Projeto - PetShop Amigo Fiel
+Autor: George Herman Becker
+Curso: Introdução a Programação Front-End e Back-End (IP 20h A)
+Data: 11/06/2026
+
+==========================================
+1. IDENTIFICAÇÃO DO PROJETO
+==========================================
+Nome: Landing Page - PetShop Amigo Fiel
+Tecnologias: HTML5, CSS3, JavaScript (ES6), Node.js (backend opcional)
+Imagens: arquivos locais em /images
+
+==========================================
+2. RESUMO DAS MUDANÇAS RECENTES
+==========================================
+- Adicionado o arquivo [ProjetoSCTEC/services.csv](ProjetoSCTEC/services.csv) com os serviços e preços.
+- O formulário de contato agora permite selecionar múltiplos serviços (checkboxes) gerados a partir do CSV.
+- O campo de valor do serviço passou a ser calculado automaticamente (soma dos serviços selecionados) e é somente leitura.
+- Os cards da seção de serviços exibem os preços a partir do CSV.
+- O backend (`/salvar-lead`) continua registrando leads em `leads.json` e `leads.csv`.
+
+==========================================
+3. ESTRUTURA E ARQUIVOS IMPORTANTES
+==========================================
+- index.html — página principal (frontend)
+- styles.css — estilos
+- scriptcall.js — lógica do chatbot
+- backend.js — servidor Express para salvar leads e fornecer chat (opcional)
+- leads.json / leads.csv — armazenamento de leads gerados pelo backend
+- services.csv — tabela editável de serviços e preços (formato CSV simples)
+
+==========================================
+4. FORMATO DO services.csv
+==========================================
+O arquivo `services.csv` tem duas colunas com cabeçalho:
+
+service,price
+"Banho & Tosa",120
+Consultas,180
+"Hotel para pets",150
+
+Observações:
+- `service`: nome do serviço (string). Use aspas se conter vírgula ou `&`.
+- `price`: preço numérico (sem símbolo `R$`). O frontend converte para BRL ao exibir.
+
+Para alterar preços ou adicionar serviços, edite [ProjetoSCTEC/services.csv](ProjetoSCTEC/services.csv) e atualize a página no navegador.
+
+==========================================
+5. COMO FUNCIONA O FORMULÁRIO
+==========================================
+- Os serviços são carregados do CSV pelo frontend e renderizados como checkboxes.
+- O usuário pode marcar mais de um serviço; o sistema soma os preços e atualiza o campo `Valor total` automaticamente.
+- No envio, o backend recebe um objeto JSON contendo: `nome`, `email`, `whatsapp`, `descricao`, `nomePet`, `raca`, `tipoServico` (string com lista de serviços), `valorServico` (valor numérico total) e `dataRegistro`.
+
+==========================================
+6. ROTEIRO DE TESTE (LOCAL)
+==========================================
+1) Iniciar o backend (opcional, para salvar leads):
+```powershell
+cd ProjetoSCTEC
+node backend.js
+```
+
+2) Servir os arquivos estáticos (recomendado para evitar problemas de fetch do CSV):
+```powershell
+# Instale http-server se necessário: npm install -g http-server
+cd ProjetoSCTEC
+http-server -c-1
+```
+Ou use a extensão Live Server do VS Code e abra `index.html`.
+
+3) Acesse a página no navegador, selecione serviços e submeta o formulário.
+4) Verifique:
+- Mensagem de sucesso exibida no formulário
+- `leads.json` e `leads.csv` atualizados (se o backend estiver rodando)
+- Console do navegador para logs e possíveis erros
+
+==========================================
+7. OBSERVAÇÕES TÉCNICAS
+==========================================
+- O frontend faz um fetch de `services.csv` via requisição HTTP; servir os arquivos por um servidor local evita problemas de CORS/file://.
+- Se desejar, é possível mover a leitura do CSV para o backend e expor uma rota `/services` que retorne JSON.
+- O campo `valorServico` enviado ao backend é numérico (string contendo número) — o backend atualmente grava tal valor em `leads.json` e no CSV de leads.
+
+==========================================
+8. PRÓXIMOS PASSOS SUGERIDOS
+==========================================
+- Adicionar rota backend `/services` para fornecer serviços como JSON (melhor para integrações futuras).
+- Atualizar o frontend para recarregar dinamicamente os cards sem precisar de refresh completo quando o CSV mudar no servidor.
+- Adicionar testes automatizados simples para validação do formulário.
+
+==========================================
+Contato: George Herman Becker — SCTEC

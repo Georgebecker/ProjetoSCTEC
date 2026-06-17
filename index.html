@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<!--
+    ================================================================
+    PETSHOP AMIGO FIEL - LANDING PAGE
+    Autor: George Herman Becker - SCTEC
+    Data: 11/06/2026
+    Objetivo: Landing page completa com formulário de cadastro e chatbot
+    
+    ESTRUTURA DO DOCUMENTO:
+    - HEAD: metadados, links de CSS e fontes externas
+    - BODY: seções de conteúdo (hero, sobre, serviços, contato, rodapé)
+    - Scripts: JavaScript inline e externo para interatividade
+    ================================================================
+-->
+<html lang="pt-br">
+<head>
+    <!-- Configurações básicas do documento -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetShop Amigo Fiel - George Becker</title>
+    
+    <!-- Importar fonte externa (Poppins) do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Carrega os estilos do arquivo externo styles.css -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Script de inicialização: aviso sobre segurança da API -->
+    <script>
+        console.log('Chatbot frontend carregado. A chave DEEPSEEK_API_KEY só está disponível no servidor Node.js, não no navegador.');
+    </script>
+</head>
+<body>
+
+    <!-- ===== SEÇÃO HERO (Banner Principal) ===== -->
+    <header class="hero">
+        <div class="hero-content">
+            <!-- Título principal com destaque na palavra "Amigo Fiel" -->
+            <h1>PetShop <span>Amigo Fiel</span></h1>
+            <!-- Slogan descritivo -->
+            <p>Amor, cuidado e diversao para seu melhor amigo</p>
+            <!-- Botão de chamada para ação (leva até a seção de contato) -->
+            <a href="#contato" class="cta-button">Agende um Horario</a>
+        </div>
+        <!-- Imagem do lado direito do banner -->
+        <div class="hero-image">
+            <img id="hero-carousel" src="images/chow-chow.jpg" alt="Imagem rotativa de cachorro para o PetShop" />
+        </div>
+    </header>
+
+    <!-- ===== SEÇÃO SOBRE ===== -->
+    <section id="sobre" class="sobre">
+        <div class="container">
+            <!-- Texto de apresentação -->
+            <div class="sobre-texto">
+                <h2>Sobre nos</h2>
+                <p>Ha mais de 10 anos cuidando do seu pet com todo carinho. Somos uma equipe apaixonada por animais e oferecemos servicos de alta qualidade.</p>
+                <!-- Indicadores visuais de credibilidade -->
+                <div class="indicadores">
+                    <div class="indicador"><h3>+5.000</h3><p>Pets atendidos</p></div>
+                    <div class="indicador"><h3>12</h3><p>Anos de experiencia</p></div>
+                    <div class="indicador"><h3>100%</h3><p>Clientes satisfeitos</p></div>
+                </div>
+            </div>
+            <!-- Imagem decorativa -->
+            <div class="sobre-imagem">
+                <img src="images/shih-tzu.jpg" alt="Cachorrinho Shih Tzu fofinho">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO SERVIÇOS ===== -->
+    <section id="servicos" class="servicos">
+        <div class="container">
+            <h2>Nossos Servicos</h2>
+            <!-- Cards com apresentação dos serviços principais -->
+            <div class="cards">
+                <!-- Card 1: Banho & Tosa -->
+                <div class="card">
+                    <img src="images/icon-banho.svg" alt="Ícone Banho e Tosa">
+                    <h3>Banho & Tosa</h3>
+                    <p>Banho completo, tosa e secagem. Cuidamos do pelo e da higiene. Valor a partir de R$ 120.</p>
+                </div>
+                <!-- Card 2: Consultas Veterinárias -->
+                <div class="card">
+                    <img src="images/icon-consulta.svg" alt="Ícone Consultas Veterinarias">
+                    <h3>Consultas</h3>
+                    <p>Consulta veterinária com exame geral e orientação de cuidados. Valor a partir de R$ 180.</p>
+                </div>
+                <!-- Card 3: Hotel para Pets -->
+                <div class="card">
+                    <img src="images/icon-hotel.svg" alt="Ícone Hotel para pets">
+                    <h3>Hotel para pets</h3>
+                    <p>Hospedagem com conforto e atenção 24h. Valor a partir de R$ 150 por noite.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO CONTATO / CADASTRO ===== -->
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2>Cadastro de Cliente e Pet</h2>
+            <!-- Formulário para coleta de dados de clientes -->
+            <!-- Os dados são enviados via AJAX para o backend em http://localhost:3000/salvar-lead -->
+            <form id="form-contato">
+                <!-- Dados do proprietário -->
+                <input type="text" id="nome" placeholder="Nome do proprietario" required>
+                <input type="email" id="email" placeholder="E-mail do proprietario" required>
+                <input type="tel" id="whatsapp" placeholder="WhatsApp do proprietario" required>
+                <textarea id="mensagem" placeholder="Descricao / mensagem" rows="4" required></textarea>
+                
+                <!-- Dados do pet -->
+                <input type="text" id="nome-pet" placeholder="Nome do pet" required>
+                <input type="text" id="raca" placeholder="Raça do pet" required>
+                
+                <!-- Serviço solicitado: será populado a partir de services.csv -->
+                <div id="tipo-servico-container" class="servico-list">
+                    <!-- checkboxes serão inseridos aqui dinamicamente -->
+                </div>
+                
+                <!-- Valor do serviço (calculado automaticamente) -->
+                <div class="campo-valor">
+                    <label for="valor-servico">Valor total</label>
+                    <input type="text" id="valor-servico" placeholder="R$ 0,00" readonly aria-readonly="true">
+                </div>
+                
+                <!-- Botão de envio -->
+                <button type="submit">Registrar Pet</button>
+                
+                <!-- Elemento para exibir mensagens de status (sucesso ou erro) -->
+                <div id="mensagem-status" class="status"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== RODAPÉ ===== -->
+    <footer>
+        <p>&copy; 2026 PetShop Amigo Fiel – Desenvolvido por <a href="https://www.ghbecker.com.br/" target="_blank" rel="noopener noreferrer">George Herman Becker</a> - SCTEC</p>
+    </footer>
+
+    <!-- ===== SCRIPT INLINE: Manipulação do Formulário e Serviços (dinâmico) ===== -->
+    <script>
+        console.log("✅ Página carregada com sucesso - carregando serviços...");
+
+        // Formata número para moeda BRL
+        function formatBRL(value) {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+        }
+
+        // Parse CSV simples (header + rows)
+        function parseCSV(text) {
+            const lines = text.split(/\r?\n/).filter(l => l.trim() !== '');
+            const header = lines.shift().split(',').map(h => h.trim());
+            return lines.map(line => {
+                const cols = line.split(',');
+                const obj = {};
+                for (let i = 0; i < header.length; i++) {
+                    obj[header[i]] = (cols[i] || '').trim().replace(/^\"|\"$/g, '');
+                }
+                return obj;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('form-contato');
+            const statusDiv = document.getElementById('mensagem-status');
+            const servicosContainer = document.getElementById('tipo-servico-container');
+            const valorInput = document.getElementById('valor-servico');
+            const cards = document.querySelectorAll('.servicos .card');
+
+            let services = [];
+
+            function renderServiceOptions() {
+                servicosContainer.innerHTML = '';
+                services.forEach(s => {
+                    const id = 'svc-' + s.service.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'servico-item';
+                    wrapper.innerHTML = `
+                        <label>
+                            <input type="checkbox" data-price="${Number(s.price)}" value="${s.service}" id="${id}"> ${s.service} — <strong>${formatBRL(Number(s.price))}</strong>
+                        </label>
+                    `;
+                    servicosContainer.appendChild(wrapper);
+                });
+
+                // adicionar listeners
+                servicosContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', updateTotal));
+            }
+
+            function updateCards() {
+                // atualiza os textos dos cards com base no nome do serviço
+                cards.forEach(card => {
+                    const title = card.querySelector('h3')?.textContent?.trim();
+                    if (!title) return;
+                    const svc = services.find(s => s.service.toLowerCase() === title.toLowerCase());
+                    const p = card.querySelector('p');
+                    if (svc && p) {
+                        p.innerHTML = p.textContent.split('Valor')[0].trim() + ' Valor a partir de ' + formatBRL(Number(svc.price)) + '.';
+                    }
+                });
+            }
+
+            function updateTotal() {
+                const checked = Array.from(servicosContainer.querySelectorAll('input[type="checkbox"]:checked'));
+                const total = checked.reduce((sum, cb) => sum + Number(cb.dataset.price || 0), 0);
+                valorInput.value = formatBRL(total);
+                valorInput.dataset.numeric = total; // valor numérico para envio
+            }
+
+            function loadServicesCSV() {
+                return fetch('services.csv')
+                    .then(resp => {
+                        if (!resp.ok) throw new Error('Não foi possível carregar services.csv');
+                        return resp.text();
+                    })
+                    .then(text => parseCSV(text))
+                    .then(rows => rows.map(r => ({ service: r.service, price: Number(r.price) })))
+                    .catch(err => {
+                        console.warn('Falha ao carregar services.csv, usando fallback', err);
+                        return [
+                            { service: 'Banho & Tosa', price: 120 },
+                            { service: 'Consultas', price: 180 },
+                            { service: 'Hotel para pets', price: 150 }
+                        ];
+                    });
+            }
+
+            // Inicialização
+            loadServicesCSV().then(list => {
+                services = list;
+                renderServiceOptions();
+                updateCards();
+                updateTotal();
+            });
+
+            form.addEventListener('submit', function(evento) {
+                evento.preventDefault();
+                try {
+                    const nome = document.getElementById('nome').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const whatsapp = document.getElementById('whatsapp').value.trim();
+                    const descricao = document.getElementById('mensagem').value.trim();
+                    const nomePet = document.getElementById('nome-pet').value.trim();
+                    const raca = document.getElementById('raca').value.trim();
+
+                    // coletar serviços selecionados
+                    const checked = Array.from(servicosContainer.querySelectorAll('input[type="checkbox"]:checked'));
+                    if (checked.length === 0) {
+                        statusDiv.innerHTML = 'Erro: selecione ao menos um serviço.';
+                        statusDiv.style.color = 'red';
+                        return;
+                    }
+
+                    const tipoServico = checked.map(cb => cb.value).join(', ');
+                    const valorServico = valorInput.dataset.numeric || '0';
+
+                    // validações básicas
+                    if (!nome || !email || !whatsapp || !descricao || !nomePet || !raca) {
+                        statusDiv.innerHTML = 'Erro: preencha todos os campos obrigatórios.';
+                        statusDiv.style.color = 'red';
+                        return;
+                    }
+
+                    const leadData = {
+                        nome,
+                        email,
+                        whatsapp,
+                        descricao,
+                        nomePet,
+                        raca,
+                        tipoServico,
+                        valorServico,
+                        dataRegistro: new Date().toISOString()
+                    };
+
+                    statusDiv.innerHTML = 'Enviando cadastro...';
+                    statusDiv.style.color = 'black';
+
+                    fetch('http://localhost:3000/salvar-lead', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(leadData)
+                    })
+                    .then(async function(response) {
+                        if (!response.ok) {
+                            const errorBody = await response.text();
+                            throw new Error(`Servidor retornou status ${response.status}: ${errorBody}`);
+                        }
+                        return response.json();
+                    })
+                    .then(function(result) {
+                        const dataHora = new Date().toLocaleString('pt-BR');
+                        const numeroRegistro = Math.floor(Math.random() * 1000000);
+                        const mensagemSucesso = `✅ Pedido #${numeroRegistro} registrado com sucesso em ${dataHora}! Obrigado por cadastrar ${nomePet}.`;
+                        statusDiv.innerHTML = mensagemSucesso;
+                        statusDiv.style.color = 'green';
+                        statusDiv.style.fontWeight = 'bold';
+                        form.reset();
+                        // limpar total
+                        updateTotal();
+                    })
+                    .catch(function(error) {
+                        console.error('Erro ao salvar lead:', error);
+                        statusDiv.innerHTML = 'Erro ao salvar os dados. Tente novamente mais tarde.';
+                        statusDiv.style.color = 'red';
+                    });
+
+                } catch (erro) {
+                    console.error('Erro no submit:', erro);
+                    statusDiv.innerHTML = 'Erro inesperado. Tente novamente mais tarde.';
+                    statusDiv.style.color = 'red';
+                }
+            });
+        });
+    </script>
+
+    <!-- ===== CHATBOT: Botão e Container ===== -->
+
+    <button id="chatbotButton" class="chatbot-button" aria-label="Abrir chatbot de pets">🐾</button>
+
+    <div id="chatContainer" class="chat-hidden">
+        <!-- Chatbot pet friendly -->
+        <div id="chatbotPanel" class="chatbot-panel" aria-hidden="true">
+            <div class="chatbot-header">
+                <span>Chat Pet</span>
+                <button id="chatbotClose" class="chatbot-close" aria-label="Fechar chatbot">✕</button>
+            </div>
+            <div id="chatbotMessages" class="chatbot-messages"></div>
+            <form id="chatbotForm" class="chatbot-form">
+                <input id="chatbotInput" type="text" placeholder="Pergunte sobre banho, tosa ou cuidado de pets" aria-label="Mensagem para o chatbot" />
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroImage = document.getElementById('hero-carousel');
+            const images = [
+                'images/chow-chow.jpg',
+                'images/shih-tzu.jpg',
+                'images/dogpet (1).jpg',
+                'images/dogpet (2).jpg',
+                'images/dogpet (3).jpg',
+                'images/dogpet (4).jpg',
+                'images/dogpet (5).jpg',
+                'images/dogpet (6).jpg',
+                'images/dogpet (7).jpg',
+                'images/dogpet (8).jpg'
+            ];
+            let current = 0;
+
+            function nextImage() {
+                if (!heroImage) return;
+                heroImage.style.opacity = '0';
+                current = (current + 1) % images.length;
+                setTimeout(() => {
+                    heroImage.src = images[current];
+                    heroImage.alt = 'Imagem rotativa de cachorro para o PetShop';
+                    heroImage.style.opacity = '1';
+                }, 500);
+            }
+
+            setInterval(nextImage, 6000);
+        });
+    </script>
+    <script src="scriptcall.js"></script>
+</body>
+</html>

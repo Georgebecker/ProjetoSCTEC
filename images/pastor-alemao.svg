@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120">
+  <title>Pastor Alemão</title>
+  <rect width="100%" height="100%" fill="#fff"/>
+  <g transform="translate(12,8)">
+    <ellipse cx="88" cy="76" rx="60" ry="28" fill="#d9c7a6" />
+    <circle cx="44" cy="36" r="22" fill="#c79b6a" />
+    <path d="M30 28 l10 -14 l14 6" fill="#8b5e3c" opacity="0.9" />
+    <circle cx="58" cy="36" r="4" fill="#231f20" />
+    <rect x="102" y="52" width="18" height="8" rx="3" fill="#b5885a" transform="rotate(10 111 56)" />
+  </g>
+  <text x="100" y="115" font-size="12" text-anchor="middle" fill="#666">Pastor Alemão</text>
+</svg>

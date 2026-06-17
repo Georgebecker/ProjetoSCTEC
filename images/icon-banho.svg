@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Ícone Banho">
+  <rect x="14" y="44" width="100" height="56" rx="12" fill="#4fc3f7"/>
+  <path d="M24 44 C24 28 40 18 64 18 C88 18 104 28 104 44" fill="#81d4fa"/>
+  <circle cx="40" cy="74" r="8" fill="#fff"/>
+  <circle cx="64" cy="82" r="8" fill="#fff"/>
+  <circle cx="88" cy="72" r="8" fill="#fff"/>
+  <path d="M40 28 L32 8 M56 24 L58 4 M80 28 L88 8" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+</svg>
